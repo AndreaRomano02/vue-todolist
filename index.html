@@ -20,21 +20,25 @@
       <header class="text-center mb-5">
         <h1>TODO List</h1>
       </header>
-      <main class="d-flex justify-content-center align-items-center">
+      <main class="d-flex flex-column justify-content-center align-items-center">
         <ul class="list-group w-75">
-          <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" id="firstCheckbox" />
-            <label class="form-check-label" for="firstCheckbox">First checkbox</label>
-          </li>
-          <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" id="secondCheckbox" />
-            <label class="form-check-label" for="secondCheckbox">Second checkbox</label>
-          </li>
-          <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" id="thirdCheckbox" />
-            <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
+          <li v-for="(item, i) in lists" class="list-group-item">
+            <label class="form-check-label" :class="{'text-decoration-line-through': item.done}">
+              <input class="form-check-input me-2" type="checkbox" v-model="item.done" />
+              {{item.text}}
+            </label>
           </li>
         </ul>
+        <div class="input-group m-3 w-75">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Aggiungi una voce alla lista"
+            v-model="input"
+            @keyup.enter="addToList"
+          />
+          <button class="btn btn-success" type="button" @click="addToList">AGGIUNGI</button>
+        </div>
       </main>
     </div>
   </body>
