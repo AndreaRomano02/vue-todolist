@@ -7,6 +7,8 @@ const myApp = createApp({
   name: 'LIST',
   data() {
     return {
+      filterInput: '',
+
       //# Input per aggiungere oggetti nella lista
       input: '',
 
@@ -37,16 +39,24 @@ const myApp = createApp({
   },
 
   //# Computed
-  computed: {},
+  computed: {
+    //# Filter by an input
+    filterList() {
+      return this.lists.filter((list) => list.text.toLowerCase().includes(this.filterInput));
+    },
+  },
 
   //# Methods
   methods: {
     //# Add an element on list
     addToList() {
+      if (this.input === '') return;
+
       const listElement = { text: `${this.input}`, done: false };
       this.lists.push(listElement);
 
       this.input = '';
+      this.filterInput = '';
     },
 
     //# Remove a single element in a list

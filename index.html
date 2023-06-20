@@ -31,9 +31,14 @@
       </header>
 
       <main class="d-flex flex-column justify-content-center align-items-center">
+        <div class="input-group mb-5 w-75">
+          <input type="text" class="form-control" placeholder="Cerca..." v-model.trim="filterInput" />
+          <button class="btn btn-warning" type="button" @click="filterList">Filtra</button>
+        </div>
+
         <ul class="list-group w-75">
           <!-- List Element -->
-          <li v-for="(item, i) in lists" class="list-group-item d-flex align-items-center justify-content-between">
+          <li v-for="(item, i) in filterList" class="list-group-item d-flex align-items-center justify-content-between">
             <label class="form-check-label" :class="{'text-decoration-line-through': item.done}">
               <!-- CheckBox -->
               <input class="form-check-input me-2" type="checkbox" v-model="item.done" />
@@ -52,7 +57,7 @@
             type="text"
             class="form-control"
             placeholder="Aggiungi una voce alla lista"
-            v-model="input"
+            v-model.trim="input"
             @keyup.enter="addToList"
           />
           <button class="btn btn-success" type="button" @click="addToList">AGGIUNGI</button>
