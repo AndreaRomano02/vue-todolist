@@ -7,7 +7,10 @@ const myApp = createApp({
   name: 'LIST',
   data() {
     return {
+      //# Input per aggiungere oggetti nella lista
       input: '',
+
+      //# Array della lista
       lists: [
         {
           text: 'Andare a fare la spesa.',
@@ -32,13 +35,23 @@ const myApp = createApp({
       ],
     };
   },
+
+  //# Computed
   computed: {},
+
+  //# Methods
   methods: {
+    //# Add an element on list
     addToList() {
       const listElement = { text: `${this.input}`, done: false };
       this.lists.push(listElement);
 
       this.input = '';
+    },
+
+    //# Remove a single element in a list
+    deleteThis(index) {
+      this.lists.splice(index, 1);
     },
   },
 });
